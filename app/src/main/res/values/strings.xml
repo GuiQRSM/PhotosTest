@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PhotosTest</string>
+    <string name="info_content_description">imagen selecionada pelo usuario</string>
+    <string name="image_select">selecione uma imagen</string>
 </resources>
