@@ -1,6 +1,8 @@
 package com.littletoth.photostest
 
 import android.Manifest
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -21,10 +23,10 @@ class MainActivity : AppCompatActivity() {
                     requestPermissions(permission,PERMISSION_CODE)
                 }
                 else {
-                    pickImageFromGallery
+                    pickImageFromGallery()
                 }
             }else {
-                pickImageFromGallery
+                pickImageFromGallery()
             }
         }
     }
@@ -41,6 +43,19 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this, "Permissão Negada", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+    }
+
+    private fun pickImageFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent,IMAGE_PICK_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
+            image_view.setImageURI(data?.data)
         }
     }
 
